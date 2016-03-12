@@ -1,0 +1,42 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+  /* make transparent link selection, adjust last value opacity 0 to 1.0 */ }
+
+body {
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;
+  /* prevent copy paste, to allow, change 'none' to 'text' */
+  font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%; }
+
+/* Portrait layout (default) */
+.app .splash {
+  height: 100vh;
+  background-color: #46B29D;
+  text-align: center; }
+  .app .splash .splash-content {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center; }
+.app .splash::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle; }
+
+h1 {
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  text-align: center; }
+
+/*# sourceMappingURL=index.css.map */
