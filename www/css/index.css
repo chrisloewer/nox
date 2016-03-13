@@ -19,7 +19,7 @@ body {
 /* Portrait layout (default) */
 .app .splash {
   height: 100vh;
-  background-color: #46B29D;
+  background: linear-gradient(to bottom, #64FFE0, #42a68f);
   text-align: center; }
   .app .splash .splash-content {
     display: inline-block;
@@ -30,13 +30,19 @@ body {
   display: inline-block;
   height: 100%;
   vertical-align: middle; }
+.app .content-container {
+  height: 100vh;
+  background: url(../img/loading.gif) center center no-repeat #444449;
+  overflow: hidden; }
+  .app .content-container .content {
+    margin: 0;
+    padding: 0; }
+
+.hidden {
+  display: none; }
 
 h1 {
   font-size: 24px;
-  font-weight: normal;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
   text-align: center; }
 
 /*# sourceMappingURL=index.css.map */

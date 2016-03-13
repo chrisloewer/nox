@@ -1,4 +1,6 @@
-$teal: #46B29D;
+$teal: #64FFE0;
+$teal-2: #42a68f;
+$gray: #444449;
 
 
 * {
@@ -22,7 +24,7 @@ body {
 
   .splash {
     height: 100vh;
-    background-color: $teal;
+    background: linear-gradient(to bottom, $teal, $teal-2);
     text-align: center;
 
     .splash-content {
@@ -37,14 +39,24 @@ body {
     height: 100%;
     vertical-align: middle;
   }
+
+  .content-container {
+    height: 100vh;
+    background: url(../img/loading.gif) center center no-repeat $gray;
+    overflow: hidden;
+
+    .content {
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
 
+.hidden {
+  display: none;
+}
 
 h1 {
   font-size:24px;
-  font-weight:normal;
-  margin:0;
-  overflow:visible;
-  padding:0;
   text-align:center;
 }
