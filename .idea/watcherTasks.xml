@@ -20,5 +20,24 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" value="" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="handlebars;hbs;mustache" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="Handlebars" />
+      <option name="output" value="" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PROJECT_DIR$/www/templates/precompile.bat" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="C:\Users\chris\Google Drive\School\2016 Spring\Mobile Development\Project\Nox\www\templates" />
+      <envs />
+    </TaskOptions>
   </component>
 </project>

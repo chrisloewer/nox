@@ -42,3 +42,10 @@ function padInt(int, len){
   }
   return str;
 }
+
+// Insert handlebars template
+function insertTemplate(element, templateName, json) {
+  //var element = document.getElementById(elementId);
+  var template = Handlebars.templates[templateName];
+  element.innerHTML = template(json);
+}

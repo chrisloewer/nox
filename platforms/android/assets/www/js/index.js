@@ -1,33 +1,40 @@
 
 
 var app = {
-  // Application Constructor
   initialize: function() {
     this.bindEvents();
   },
-  // Bind Event Listeners
-  //
-  // Bind any events that are required on startup. Common events are:
-  // 'load', 'deviceready', 'offline', and 'online'.
+
   bindEvents: function() {
     document.addEventListener('deviceready', this.onDeviceReady, false);
-  },
-  // deviceready Event Handler
-  //
-  // The scope of 'this' is the event. In order to call the 'receivedEvent'
-  // function, we must explicitly call 'app.receivedEvent(...);'
-  onDeviceReady: function() {
-    app.receivedEvent('deviceready');
     setTimeout(function() {
       hideSplash();
-      setUnsplashImg();
+      nextPage();
     }, 1200);
+  },
+
+  onDeviceReady: function() {
+    app.receivedEvent('deviceready');
   },
   receivedEvent: function(id) {
     console.log('Received Event: ' + id);
   },
   historyStack: [],
-  page: 0
+  page: 0,
+  newsUrls: [
+    'http://feeds.bbci.co.uk/news/world/rss.xml',
+    'https://medium.com/feed/tech-talk',
+    'http://www.engadget.com/rss.xml',
+    'http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml',
+    'http://feeds.abcnews.com/abcnews/topstories'
+  ],
+  redditUrls: [
+    'https://www.reddit.com/r/todayilearned/.rss',
+    'https://www.reddit.com/r/worldnews/.rss',
+    'https://www.reddit.com/r/mildlyinteresting/.rss',
+    'https://www.reddit.com/r/science/.rss',
+    'https://www.reddit.com/r/funny/.rss'
+  ]
 };
 
 app.initialize();
@@ -38,16 +45,26 @@ window.onload = function() {
   document.addEventListener('touchmove', touchHandler, false);
   document.addEventListener('touchend', touchHandler, false);
   document.addEventListener('click', touchHandler, false);
-  //document.addEventListener('click', function() {
-  //  console.log('DAnk and AHELL');
-  //}, false);
+  document.addEventListener('keyup', keyHandler, false);
 };
 
 
+// ------------------------------------ KEY EVENT HANDLERS ----------------------------------- //
+
+function keyHandler(e) {
+
+  switch(e.keyCode) {
+    case 37:  // Left Key
+      prevPage();
+      break;
+    case 39:  // Right Key
+      nextPage();
+      break;
+  }
+}
 
 
 // ------------------------------------ TOUCH EVENT HANDLERS --------------------------------- //
-
 
 touches = {
   "touchstart": {"x":-1, "y":-1},
@@ -55,6 +72,8 @@ touches = {
   "touchend"  : false,
   "direction" : "undetermined"
 };
+
+var minTouchDistance = 100;
 
 function touchHandler(e) {
   var touch;
@@ -74,12 +93,10 @@ function touchHandler(e) {
             touches.direction = touches.touchstart.x < touches.touchmove.x ? "right" : "left";
             var swipeDist = Math.abs(touches.touchstart.x - touches.touchmove.x);
 
-            if(touches.direction == 'left' && swipeDist > 100) {
-              console.log('go to next page');
+            if(touches.direction == 'left' && swipeDist > minTouchDistance) {
               nextPage();
             }
-            else if(touches.direction == 'right' && swipeDist > 100) {
-              console.log('go to prev page');
+            else if(touches.direction == 'right' && swipeDist > minTouchDistance) {
               prevPage();
             }
           }

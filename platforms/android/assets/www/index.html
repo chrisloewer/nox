@@ -8,13 +8,12 @@
     Some notes:
         * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
         * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-            * Enable inline JS: add 'unsafe-inline' to default-src
     -->
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin+Condensed:400,500,600,700' rel='stylesheet' type='text/css'>
     <title>Hello World</title>
   </head>
 
@@ -29,6 +28,30 @@
       </div>
 
       <div class="content-container" id="_container">
+
+        <div class="load-screen">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+            <rect x="0" y="0" width="4" height="15" fill="#333">
+              <animateTransform attributeType="xml"
+                attributeName="transform" type="translate"
+                values="0 0; 0 20; 0 0"
+                begin="0" dur="0.8s" repeatCount="indefinite" />
+            </rect>
+            <rect x="10" y="0" width="4" height="15" fill="#333">
+              <animateTransform attributeType="xml"
+                attributeName="transform" type="translate"
+                values="0 0; 0 20; 0 0"
+                begin="0.2s" dur="0.8s" repeatCount="indefinite" />
+            </rect>
+            <rect x="20" y="0" width="4" height="15" fill="#333">
+              <animateTransform attributeType="xml"
+                attributeName="transform" type="translate"
+                values="0 0; 0 20; 0 0"
+                begin="0.4s" dur="0.8s" repeatCount="indefinite" />
+            </rect>
+          </svg>
+        </div>
+
         <div class="content" id="_content">
         </div>
       </div>
@@ -41,5 +64,7 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/content-utilities.js"></script>
     <script type="text/javascript" src="js/general-utilities.js"></script>
+    <script type="text/javascript" src="js/handlebars.runtime-v4.0.5.js"></script>
+    <script type="text/javascript" src="templates/templates.js"></script>
   </body>
 </html>
