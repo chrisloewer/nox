@@ -72,6 +72,49 @@ body {
       padding: 0;
     }
   }
+
+  .settings-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: url(../img/option-icon.png) center center / 25px no-repeat $teal-2;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    box-shadow: 0.5px 1px 4px 1px transparentize($gray, 0.3);
+  }
+
+  .close-icon {
+    $size-close-icon: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: $size-close-icon;
+    height: $size-close-icon;
+    line-height: $size-close-icon;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid $teal-2;
+    border-radius: 50%;
+    background-color: $gray-light;
+  }
+  .close-icon:hover {
+    background-color: $gray;
+  }
+
+  .page {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: #FFFFFF;
+  }
+  .page.current {
+    display: block;
+  }
 }
 
 .image-container {
@@ -82,7 +125,7 @@ body {
 
 .news-container {
   width: 100%;
-  min-height: 100vh;
+  margin-bottom: 80px;
   background-color: $gray-light;
   text-align: center;
 
@@ -93,7 +136,7 @@ body {
     margin: 10px 0;
     padding: 10px 0;
     background-color: white;
-    box-shadow: 0 1px 3px 1px transparentize($gray, 0.3);
+    box-shadow: 0 1px 3px 1px transparentize(black, 0.3);
 
     p {
       padding: 0 10px;
@@ -105,6 +148,7 @@ body {
     img {
       max-width: 100%;
       height: auto;
+      display: inline-block;
     }
     table {
       display: inline-block;
@@ -131,3 +175,27 @@ h3 {
   color: black;
 }
 
+
+//------------------------------------ ANIMATIONS ------------------------------------
+
+@keyframes moveFromBottom {
+  from {
+    background-color: #333333;
+    transform: translateY(100%);
+  }
+}
+@keyframes moveToBottom {
+  from {}
+  to {
+    background-color: #333333;
+    transform: translateY(100%);
+  }
+}
+
+.anim-in {
+  animation: moveFromBottom 0.3s ease-out;
+}
+
+.anim-out {
+  animation: moveToBottom 0.3s ease;
+}

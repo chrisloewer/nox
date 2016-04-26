@@ -9,7 +9,13 @@ function nextPage() {
     // Create new page
     var r = Math.random();
 
-    if(r<0.15) {         // Reddit
+    if(r<0.1) {             // Web Comic
+      addComic('http://www.webtoons.com/en/challenge/sarahs-scribbles/rss?title_no=48');
+    }
+    else if(r<0.2) {        // Web Comic
+      addComic('http://feeds.feedburner.com/PoorlyDrawnLines');
+    }
+    else if(r<0.5) {       // Reddit
       src = getSource(app.redditUrls);
       if(src) {
         addReddit(src);
@@ -18,7 +24,7 @@ function nextPage() {
         addUnsplashImg();
       }
     }
-    else if(r<0.3){     // News
+    else if(r<0.65){     // News
       src = getSource(app.newsUrls);
       if(src) {
         addNews(src);
@@ -30,8 +36,6 @@ function nextPage() {
     else {              // Images
       addUnsplashImg();
     }
-
-    // TODO add web-comics
 
     app.page++;
   }
@@ -110,6 +114,7 @@ function addUnsplashImg() {
 
 // ---------------------------------- FEEDS ------------------------------------- //
 
+// ----------- NEWS ----------------
 function addNews(rssFeed) {
   var numArticles = 8;
 
@@ -128,6 +133,7 @@ function parseFeed(feed) {
   insertTemplate(content, 'news-items', feed.responseData.feed);
 }
 
+// ----------- REDDIT --------------
 
 function addReddit(rssFeed) {
   var numArticles = 15;
@@ -136,9 +142,9 @@ function addReddit(rssFeed) {
   var url = encodeURIComponent(rssFeed);
   var googleUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num='+ numArticles +'&q=' + url + '&callback=parseRedditFeed';
 
-  var newsPage = new Page('news', googleUrl);
-  app.historyStack.push(newsPage);
-  newsPage.inflate();
+  var page = new Page('news', googleUrl);
+  app.historyStack.push(page);
+  page.inflate();
 }
 
 // Callback when google finishes converting RSS XML to JSON
@@ -150,4 +156,26 @@ function parseRedditFeed(feed) {
   insertTemplate(content, 'news-items', temp);
 }
 
+// ----------- COMICS --------------
 
+function addComic(rssFeed) {
+  // This will be narrowed down
+  var numArticles = 100;
+
+  // creating temp scripts which will help us to transform XML (RSS) to JSON
+  var url = encodeURIComponent(rssFeed);
+  var googleUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num='+ numArticles +'&q=' + url + '&callback=parseComicFeed';
+
+  var page = new Page('news', googleUrl);
+  app.historyStack.push(page);
+  page.inflate();
+}
+
+function parseComicFeed(feed) {
+  // Get random comic from what is returned
+  var content = document.getElementById('_content');
+  var temp = feed.responseData.feed;
+  var index = Math.floor(Math.random()*temp.entries.length);
+  var data = { entries: [temp.entries[index]]};
+  insertTemplate(content, 'news-items', data);
+}

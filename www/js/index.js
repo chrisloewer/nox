@@ -91,12 +91,13 @@ function touchHandler(e) {
           touches[e.type] = true;
           if (touches.touchstart.y > -1 && touches.touchmove.y > -1) {
             touches.direction = touches.touchstart.x < touches.touchmove.x ? "right" : "left";
-            var swipeDist = Math.abs(touches.touchstart.x - touches.touchmove.x);
+            var swipeDistX = Math.abs(touches.touchstart.x - touches.touchmove.x);
+            var swipeDistY = Math.abs(touches.touchstart.y - touches.touchmove.y);
 
-            if(touches.direction == 'left' && swipeDist > minTouchDistance) {
+            if(touches.direction == 'left' && swipeDistX > minTouchDistance && swipeDistX > swipeDistY) {
               nextPage();
             }
-            else if(touches.direction == 'right' && swipeDist > minTouchDistance) {
+            else if(touches.direction == 'right' && swipeDistX > minTouchDistance && swipeDistX > swipeDistY) {
               prevPage();
             }
           }
@@ -114,4 +115,32 @@ function touchHandler(e) {
       }
     }
   }
+}
+
+// ------------------------------------ PAGE TRANSITION ANIMATIONS --------------------------- //
+
+function showPage(pageId) {
+  var page = document.getElementById(pageId);
+
+  addClass(page, 'current');
+  addClass(page, 'anim-in');
+  page.addEventListener('animationend', animHelper);
+
+  function animHelper() {
+    removeClass(this, 'anim-in');
+    this.removeEventListener('animationend',animHelper);
+  }
+}
+
+function hidePage(pageId) {
+  var page = document.getElementById(pageId);
+  addClass(page, 'anim-out');
+  page.addEventListener('animationend', resetPage);
+}
+
+function resetPage() {
+  removeClass(this, 'current');
+  removeClass(this, 'anim-in');
+  removeClass(this, 'anim-out');
+  this.removeEventListener('animationend', resetPage);
 }
