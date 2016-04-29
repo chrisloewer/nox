@@ -221,6 +221,18 @@ function addNewsSource() {
   console.log(str);
 }
 
+function delNewsSource(index) {
+  var newsSources = getNewsSources();
+  newsSources.splice(index, 1);
+
+  // Store change
+  localStorage.setItem(newsID, JSON.stringify(newsSources));
+  // Let app now of change
+  app.updateSources();
+  // Redraw list
+  showSources();
+}
+
 function addRedditSource() {
   var str = document.getElementById('_add-reddit-input').value;
   if(str == '') {
@@ -238,4 +250,16 @@ function addRedditSource() {
   showSources();
 
   console.log(str);
+}
+
+function delRedditSource(index) {
+  var redditSources = getRedditSources();
+  redditSources.splice(index, 1);
+
+  // Store change
+  localStorage.setItem(redditID, JSON.stringify(redditSources));
+  // Let app now of change
+  app.updateSources();
+  // Redraw list
+  showSources();
 }

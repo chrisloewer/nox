@@ -25,8 +25,20 @@ templates['news-items'] = template({"1":function(container,depth0,helpers,partia
     + "</div>";
 },"useData":true});
 templates['sources'] = template({"1":function(container,depth0,helpers,partials,data) {
-    return "      <div class=\"source-name\">\r\n        "
-    + container.escapeExpression(container.lambda(depth0, depth0))
+    var helper, alias1=container.escapeExpression;
+
+  return "      <div class=\"source-name\">\r\n        <span class=\"fake-link\" onclick=\"delNewsSource("
+    + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
+    + ")\">del - </span>\r\n        "
+    + alias1(container.lambda(depth0, depth0))
+    + "\r\n      </div>\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=container.escapeExpression;
+
+  return "      <div class=\"source-name\">\r\n        <span class=\"fake-link\" onclick=\"delRedditSource("
+    + alias1(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
+    + ")\">del - </span>\r\n        "
+    + alias1(container.lambda(depth0, depth0))
     + "\r\n      </div>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {};
@@ -34,7 +46,7 @@ templates['sources'] = template({"1":function(container,depth0,helpers,partials,
   return "\r\n<div class=\"source-list\">\r\n\r\n  <div id=\"_news-list\">\r\n    <h2>News Feeds</h2>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.news : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\r\n    <input type=\"text\" title=\"Add new news source\" id=\"_add-news-input\">\r\n    <button onclick=\"addNewsSource()\">Add Source</button>\r\n\r\n  </div>\r\n\r\n  <div id=\"_reddit-list\">\r\n    <h2>Reddit Feeds</h2>\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.reddit : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n    <input type=\"text\" title=\"Add new reddit source\" id=\"_add-reddit-input\">\r\n    <button onclick=\"addRedditSource()\">Add Source</button>\r\n  </div>\r\n\r\n  <hr/>\r\n  <button onclick=\"(function() {localStorage.clear();})()\">Reset Defaults</button>\r\n</div>\r\n";
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.reddit : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n    <input type=\"text\" title=\"Add new reddit source\" id=\"_add-reddit-input\">\r\n    <button onclick=\"addRedditSource()\">Add Source</button>\r\n  </div>\r\n\r\n  <hr/>\r\n  <button onclick=\"(function() {\r\n    localStorage.clear();\r\n    showSources();\r\n  })()\">Reset Defaults</button>\r\n</div>\r\n";
 },"useData":true});
 })();
