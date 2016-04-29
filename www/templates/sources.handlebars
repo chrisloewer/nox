@@ -1,0 +1,31 @@
+
+<div class="source-list">
+
+  <div id="_news-list">
+    <h2>News Feeds</h2>
+    {{#each news}}
+      <div class="source-name">
+        {{this}}
+      </div>
+    {{/each}}
+
+    <input type="text" title="Add new news source" id="_add-news-input">
+    <button onclick="addNewsSource()">Add Source</button>
+
+  </div>
+
+  <div id="_reddit-list">
+    <h2>Reddit Feeds</h2>
+    {{#each reddit}}
+      <div class="source-name">
+        {{this}}
+      </div>
+    {{/each}}
+
+    <input type="text" title="Add new reddit source" id="_add-reddit-input">
+    <button onclick="addRedditSource()">Add Source</button>
+  </div>
+
+  <hr/>
+  <button onclick="(function() {localStorage.clear();})()">Reset Defaults</button>
+</div>

@@ -75,6 +75,16 @@ body {
   background-color: #DDDDDD; }
 .app .close-icon:hover {
   background-color: #999999; }
+.app .source-list {
+  padding: 0 20px;
+  max-width: 100%;
+  word-break: break-all; }
+  .app .source-list input[type=text] {
+    width: 100%;
+    margin: 15px 0; }
+  .app .source-list button {
+    display: block;
+    margin: 0 auto; }
 .app .page {
   display: none;
   position: absolute;
@@ -122,6 +132,12 @@ body {
 a {
   color: #42a68f; }
 
+hr {
+  border: none;
+  height: 1px;
+  background-color: #42a68f;
+  margin: 30px 0; }
+
 h1 {
   font-size: 24px;
   text-align: center; }
@@ -130,6 +146,14 @@ h3 {
   font-size: 18px;
   margin: 5px 10px;
   color: black; }
+
+button {
+  background-color: #DDDDDD;
+  border: 2px solid #42a68f;
+  padding: 10px; }
+
+button:active {
+  background-color: #999999; }
 
 @keyframes moveFromBottom {
   from {

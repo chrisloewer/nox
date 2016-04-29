@@ -183,3 +183,59 @@ function parseComicFeed(feed) {
   var data = { entries: [temp.entries[index]]};
   insertTemplate(content, 'news-items', data);
 }
+
+
+
+// ---------------------------------- SOURCES ----------------------------------- //
+
+function showSettings() {
+  showPage('_settings');
+  showSources();
+}
+
+function showSources() {
+  var container = document.getElementById('_source-container');
+  var data = {
+    'news': getNewsSources(),
+    'reddit': getRedditSources()
+  };
+  insertTemplate(container,'sources', data);
+}
+
+function addNewsSource() {
+  var str = document.getElementById('_add-news-input').value;
+  if(str == '') {
+    return false;
+  }
+
+  var newsSources = getNewsSources();
+  newsSources.push(str);
+
+  // Store change
+  localStorage.setItem(newsID, JSON.stringify(newsSources));
+  // Let app now of change
+  app.updateSources();
+  // Redraw list
+  showSources();
+
+  console.log(str);
+}
+
+function addRedditSource() {
+  var str = document.getElementById('_add-reddit-input').value;
+  if(str == '') {
+    return false;
+  }
+
+  var redditSources = getRedditSources();
+  redditSources.push(str);
+
+  // Store change
+  localStorage.setItem(redditID, JSON.stringify(redditSources));
+  // Let app now of change
+  app.updateSources();
+  // Redraw list
+  showSources();
+
+  console.log(str);
+}

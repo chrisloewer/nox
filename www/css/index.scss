@@ -103,6 +103,22 @@ body {
     background-color: $gray;
   }
 
+  .source-list {
+    padding: 0 20px;
+    max-width: 100%;
+    word-break: break-all;
+
+    input[type=text] {
+      width: 100%;
+      margin: 15px 0;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
   .page {
     display: none;
     position: absolute;
@@ -164,6 +180,13 @@ a {
   color: $teal-2;
 }
 
+hr {
+  border: none;
+  height: 1px;
+  background-color: $teal-2;
+  margin: 30px 0;
+}
+
 h1 {
   font-size:24px;
   text-align:center;
@@ -173,6 +196,15 @@ h3 {
   font-size: 18px;
   margin: 5px 10px;
   color: black;
+}
+
+button {
+  background-color: $gray-light;
+  border: 2px solid $teal-2;
+  padding: 10px;
+}
+button:active {
+  background-color: $gray;
 }
 
 
