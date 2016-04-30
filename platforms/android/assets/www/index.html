@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="content-container" id="_container">
+      <div class="content-container hidden" id="_container">
 
         <div class="load-screen">
           <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
@@ -54,6 +54,21 @@
 
         <div class="content" id="_content">
         </div>
+
+      </div>
+
+      <div class="settings-icon hidden" id="_settings-icon"  onclick="showSettings()"></div>
+
+      <div class="page" id="_settings">
+        <!--<div class="underline"><h1>Settings</h1></div>-->
+        <div class="header">
+          <img class="logo" src="img/Nox.png">
+        </div>
+
+        <div class="close-icon" onclick="hidePage('_settings')">X</div>
+
+        <div class="source-container" id="_source-container"></div>
+
       </div>
 
     </div>

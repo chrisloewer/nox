@@ -50,7 +50,11 @@ function prevPage() {
 
 function hideSplash() {
   var splash = document.getElementById('_splash');
-  addClass(splash, 'hidden')
+  var icon = document.getElementById('_settings-icon');
+  var content = document.getElementById('_container');
+  addClass(splash, 'hidden');
+  removeClass(icon, 'hidden');
+  removeClass(content, 'hidden');
 }
 
 function getSource(sourceList) {
@@ -89,6 +93,14 @@ Page.prototype.inflate = function() {
     script.setAttribute('src',this._url);
     content.appendChild(script);
   }
+  else if(this._type == 'comic') {
+    // Save comic content instead of url - random url causes random comic
+    // Desired result is the same comic inflated again
+    // Data to inflate comic view is stored in _url
+
+    var container = document.getElementById('_content');
+    insertTemplate(container, 'news-items', this._url);
+  }
 };
 
 
@@ -97,10 +109,10 @@ Page.prototype.inflate = function() {
 function addUnsplashImg() {
   var contentContainer = document.getElementById('_container');
   var content = document.getElementById('_content');
+  removeChildNodes(content);
 
   var h = contentContainer.scrollHeight;
   var w = contentContainer.offsetWidth;
-  removeChildNodes(content);
 
   var timeStamp = new Date().getTime();
 
@@ -159,23 +171,108 @@ function parseRedditFeed(feed) {
 // ----------- COMICS --------------
 
 function addComic(rssFeed) {
-  // This will be narrowed down
+  // This will be narrowed down later
   var numArticles = 100;
 
   // creating temp scripts which will help us to transform XML (RSS) to JSON
   var url = encodeURIComponent(rssFeed);
   var googleUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num='+ numArticles +'&q=' + url + '&callback=parseComicFeed';
 
-  var page = new Page('news', googleUrl);
-  app.historyStack.push(page);
-  page.inflate();
+
+  // Attach script element to call google api
+  var content = document.getElementById('_content');
+  var script = document.createElement('script');
+  script.setAttribute('type','text/javascript');
+  script.setAttribute('charset','utf-8');
+  script.setAttribute('src',googleUrl);
+  content.appendChild(script);
 }
 
 function parseComicFeed(feed) {
   // Get random comic from what is returned
-  var content = document.getElementById('_content');
   var temp = feed.responseData.feed;
   var index = Math.floor(Math.random()*temp.entries.length);
   var data = { entries: [temp.entries[index]]};
-  insertTemplate(content, 'news-items', data);
+
+  var page = new Page('comic', data);
+  app.historyStack.push(page);
+  page.inflate();
+}
+
+// ---------------------------------- SOURCES ----------------------------------- //
+
+function showSettings() {
+  showPage('_settings');
+  showSources();
+}
+
+function showSources() {
+  var container = document.getElementById('_source-container');
+  var data = {
+    'news': getNewsSources(),
+    'reddit': getRedditSources()
+  };
+  insertTemplate(container,'sources', data);
+}
+
+function addNewsSource() {
+  var str = document.getElementById('_add-news-input').value;
+  if(str == '') {
+    return false;
+  }
+
+  var newsSources = getNewsSources();
+  newsSources.push(str);
+
+  // Store change
+  localStorage.setItem(newsID, JSON.stringify(newsSources));
+  // Let app now of change
+  app.updateSources();
+  // Redraw list
+  showSources();
+
+  console.log(str);
+}
+
+function delNewsSource(index) {
+  var newsSources = getNewsSources();
+  newsSources.splice(index, 1);
+
+  // Store change
+  localStorage.setItem(newsID, JSON.stringify(newsSources));
+  // Let app now of change
+  app.updateSources();
+  // Redraw list
+  showSources();
+}
+
+function addRedditSource() {
+  var str = document.getElementById('_add-reddit-input').value;
+  if(str == '') {
+    return false;
+  }
+
+  var redditSources = getRedditSources();
+  redditSources.push(str);
+
+  // Store change
+  localStorage.setItem(redditID, JSON.stringify(redditSources));
+  // Let app now of change
+  app.updateSources();
+  // Redraw list
+  showSources();
+
+  console.log(str);
+}
+
+function delRedditSource(index) {
+  var redditSources = getRedditSources();
+  redditSources.splice(index, 1);
+
+  // Store change
+  localStorage.setItem(redditID, JSON.stringify(redditSources));
+  // Let app now of change
+  app.updateSources();
+  // Redraw list
+  showSources();
 }
