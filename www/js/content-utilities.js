@@ -93,6 +93,14 @@ Page.prototype.inflate = function() {
     script.setAttribute('src',this._url);
     content.appendChild(script);
   }
+  else if(this._type == 'comic') {
+    // Save comic content instead of url - random url causes random comic
+    // Desired result is the same comic inflated again
+    // Data to inflate comic view is stored in _url
+
+    var container = document.getElementById('_content');
+    insertTemplate(container, 'news-items', this._url);
+  }
 };
 
 
@@ -163,28 +171,33 @@ function parseRedditFeed(feed) {
 // ----------- COMICS --------------
 
 function addComic(rssFeed) {
-  // This will be narrowed down
+  // This will be narrowed down later
   var numArticles = 100;
 
   // creating temp scripts which will help us to transform XML (RSS) to JSON
   var url = encodeURIComponent(rssFeed);
   var googleUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num='+ numArticles +'&q=' + url + '&callback=parseComicFeed';
 
-  var page = new Page('news', googleUrl);
-  app.historyStack.push(page);
-  page.inflate();
+
+  // Attach script element to call google api
+  var content = document.getElementById('_content');
+  var script = document.createElement('script');
+  script.setAttribute('type','text/javascript');
+  script.setAttribute('charset','utf-8');
+  script.setAttribute('src',googleUrl);
+  content.appendChild(script);
 }
 
 function parseComicFeed(feed) {
   // Get random comic from what is returned
-  var content = document.getElementById('_content');
   var temp = feed.responseData.feed;
   var index = Math.floor(Math.random()*temp.entries.length);
   var data = { entries: [temp.entries[index]]};
-  insertTemplate(content, 'news-items', data);
+
+  var page = new Page('comic', data);
+  app.historyStack.push(page);
+  page.inflate();
 }
-
-
 
 // ---------------------------------- SOURCES ----------------------------------- //
 
