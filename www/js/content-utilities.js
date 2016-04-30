@@ -99,7 +99,7 @@ Page.prototype.inflate = function() {
     // Data to inflate comic view is stored in _url
 
     var container = document.getElementById('_content');
-    insertTemplate(container, 'news-items', this._url);
+    insertTemplate(container, 'comic-items', this._url);
   }
 };
 
@@ -128,7 +128,7 @@ function addUnsplashImg() {
 
 // ----------- NEWS ----------------
 function addNews(rssFeed) {
-  var numArticles = 8;
+  var numArticles = 14;
 
   // creating temp scripts which will help us to transform XML (RSS) to JSON
   var url = encodeURIComponent(rssFeed);
