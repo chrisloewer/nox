@@ -60,7 +60,7 @@ templates['sources'] = template({"1":function(container,depth0,helpers,partials,
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 
-  return "\r\n<div class=\"source-list\">\r\n\r\n  <div id=\"_news-list\">\r\n    <h2>News Feeds</h2>\r\n"
+  return "\r\n<div class=\"source-list\">\r\n\r\n  <div class=\"center-text\">\r\n    <hr class=\"small\">\r\n    <div class=\"fake-link\"><- use arrow keys to navigate -></div>\r\n    <hr class=\"small\">\r\n  </div>\r\n\r\n  <div id=\"_news-list\">\r\n    <h2>News Feeds</h2>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.news : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\r\n    <input type=\"text\" title=\"Add new news source\" id=\"_add-news-input\">\r\n    <button onclick=\"addNewsSource()\">Add Source</button>\r\n\r\n  </div>\r\n\r\n  <div id=\"_reddit-list\">\r\n    <h2>Reddit Feeds</h2>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.reddit : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
