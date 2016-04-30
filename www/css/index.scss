@@ -161,6 +161,7 @@ body {
     width: 95%;
     margin: 10px 0;
     padding: 10px 0;
+    word-wrap: break-word;
     background-color: white;
     box-shadow: 0 1px 3px 1px transparentize(black, 0.3);
 
@@ -174,7 +175,7 @@ body {
     img {
       max-width: 100%;
       height: auto;
-      display: inline-block;
+      display: inline-block !important;
     }
     table {
       display: inline-block;

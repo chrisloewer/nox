@@ -109,10 +109,10 @@ Page.prototype.inflate = function() {
 function addUnsplashImg() {
   var contentContainer = document.getElementById('_container');
   var content = document.getElementById('_content');
+  removeChildNodes(content);
 
   var h = contentContainer.scrollHeight;
   var w = contentContainer.offsetWidth;
-  removeChildNodes(content);
 
   var timeStamp = new Date().getTime();
 
